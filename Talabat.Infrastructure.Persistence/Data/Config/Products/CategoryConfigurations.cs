@@ -4,7 +4,7 @@ using Talabat.Infrastructure.Persistence.Data.Config.Base;
 
 namespace Talabat.Infrastructure.Persistence.Data.Config.Products
 {
-    public class CategoryConfigurations : BaseEntityConfigurations<ProductCategory , int>
+    public class CategoryConfigurations : BaseAudiatbleEntityConfigurations<ProductCategory , int>
     {
         public override void Configure(EntityTypeBuilder<ProductCategory> builder)
         {

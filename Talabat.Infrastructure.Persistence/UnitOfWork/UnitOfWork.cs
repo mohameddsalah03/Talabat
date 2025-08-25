@@ -1,8 +1,9 @@
 ﻿using System.Collections.Concurrent;
 using Talabat.Core.Domain.Common;
 using Talabat.Core.Domain.Contracts;
+using Talabat.Core.Domain.Contracts.Persistence;
 using Talabat.Infrastructure.Persistence.Data;
-using Talabat.Infrastructure.Persistence.Repositories;
+using Talabat.Infrastructure.Persistence.Repositories.GenericRepository;
 
 namespace Talabat.Infrastructure.Persistence.UnitOfWork
 {
@@ -17,7 +18,7 @@ namespace Talabat.Infrastructure.Persistence.UnitOfWork
         }
 
         public IGenericRepository<TEntity, TKey> GetRepository<TEntity, TKey>()
-            where TEntity : BaseEntity<TKey>
+            where TEntity : BaseAuditableEntity<TKey>
             where TKey : IEquatable<TKey>
         {
             return (IGenericRepository<TEntity, TKey>) _repository.GetOrAdd(

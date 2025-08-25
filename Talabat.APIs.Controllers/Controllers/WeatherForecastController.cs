@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using Talabat.APIs.Models;
+using Microsoft.Extensions.Logging;
+using Talabat.APIs.Controllers.Controllers.Base;
+using Talabat.APIs.Controllers.Models;
 
-namespace Talabat.APIs.Controllers
+namespace Talabat.APIs.Controllers.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController : BaseApiController
     {
         private static readonly string[] Summaries = new[]
         {
@@ -19,7 +19,7 @@ namespace Talabat.APIs.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

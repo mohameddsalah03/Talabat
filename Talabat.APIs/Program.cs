@@ -1,7 +1,10 @@
-using System.Threading.Tasks;
 using Talabat.APIs.Extensions;
+using Talabat.APIs.Services;
+using Talabat.Core.Application.Abstraction;
 using Talabat.Infrastructure.Persistence;
+using Talabat.Core.Application;
 
+ 
 namespace Talabat.APIs
 {
     public class Program
@@ -17,7 +20,9 @@ namespace Talabat.APIs
 
             // Add services to the container.
 
-            WebApplicationbuilder.Services.AddControllers(); //Register Reqiured Services By ASP.NET Core Web APIs To DI Container 
+            WebApplicationbuilder.Services
+                .AddControllers()
+                .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly); //Register Reqiured Services By ASP.NET Core Web APIs To DI Container 
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
@@ -28,9 +33,18 @@ namespace Talabat.APIs
             // Persistence Services Layer 
             WebApplicationbuilder.Services.AddPersistenceServices(WebApplicationbuilder.Configuration);
 
+
+            //
+            WebApplicationbuilder.Services.AddHttpContextAccessor();
+            WebApplicationbuilder.Services.AddScoped(typeof(ILoggedInUserService) , typeof(LoggedInUserService));
+
+
+            //
+            WebApplicationbuilder.Services.AddApplicationServices();
+
             #endregion
-            
-            
+
+
             var app = WebApplicationbuilder.Build();
 
             #region Database Initializer 
@@ -53,6 +67,8 @@ namespace Talabat.APIs
 
             app.UseAuthorization();
 
+            // for wwwroot Path
+            app.UseStaticFiles();
 
             app.MapControllers();
 

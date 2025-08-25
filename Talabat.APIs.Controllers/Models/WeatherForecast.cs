@@ -1,4 +1,4 @@
-namespace Talabat.APIs.Models
+namespace Talabat.APIs.Controllers.Models
 {
     public class WeatherForecast
     {

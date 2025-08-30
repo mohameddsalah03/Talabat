@@ -1,4 +1,4 @@
-﻿namespace Talabat.Core.Application.Abstraction.Dtos.Products
+﻿namespace Talabat.Core.Application.Abstraction.ModelsDtos.Products
 {
     public class BrandDto
     {

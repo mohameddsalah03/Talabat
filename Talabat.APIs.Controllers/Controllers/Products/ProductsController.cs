@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.Controllers.Controllers.Base;
-using Talabat.Core.Application.Abstraction.Dtos.Products;
+using Talabat.Core.Application.Abstraction.Common;
+using Talabat.Core.Application.Abstraction.ModelsDtos.Products;
 using Talabat.Core.Application.Abstraction.Services;
 
 namespace Talabat.APIs.Controllers.Controllers.Products
@@ -10,16 +11,16 @@ namespace Talabat.APIs.Controllers.Controllers.Products
 
         //Get All Produtcs
         [HttpGet] //Get: /api/Products
-        public async Task<ActionResult<IEnumerable<ProductToReturnDto>>>  GetProducts()
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>>  GetProducts([FromQuery] ProductSpecParams specParams)
         {
-            var products = await serviceManager.ProductService.GetProductsAsync();
+            var products = await serviceManager.ProductService.GetProductsAsync( specParams);
             return Ok(products);
         }
 
         //Get Produtc by id
         [HttpGet( "{id:int}")] //Get: /api/Products/id
         public async Task<ActionResult<ProductToReturnDto>>  GetProduct(int id)
-        {
+        { 
             var product = await serviceManager.ProductService.GetProductAsync(id);
 
             if (product is null)

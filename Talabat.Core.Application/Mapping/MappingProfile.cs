@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Talabat.Core.Application.Abstraction.Dtos.Products;
+using Talabat.Core.Application.Abstraction.ModelsDtos.Products;
 using Talabat.Core.Domain.Entites.Products;
 
 namespace Talabat.Core.Application.Mapping

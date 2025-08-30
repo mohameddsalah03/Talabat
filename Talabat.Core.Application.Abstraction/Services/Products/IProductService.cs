@@ -1,10 +1,11 @@
-﻿using Talabat.Core.Application.Abstraction.Dtos.Products;
+﻿using Talabat.Core.Application.Abstraction.Common;
+using Talabat.Core.Application.Abstraction.ModelsDtos.Products;
 
 namespace Talabat.Core.Application.Abstraction.Services.Products
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductToReturnDto>> GetProductsAsync();
+        Task<Pagination<ProductToReturnDto>> GetProductsAsync(ProductSpecParams specParams);
 
         Task<ProductToReturnDto> GetProductAsync(int id);
 

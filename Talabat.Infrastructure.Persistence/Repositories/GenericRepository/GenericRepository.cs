@@ -27,6 +27,11 @@ namespace Talabat.Infrastructure.Persistence.Repositories.GenericRepository
         public async Task<TEntity?> GetWithSpecAsync(ISpecifications<TEntity, TKey> spec)
             => await ApplaySpecifications(spec).FirstOrDefaultAsync();
 
+
+        public async Task<int> GetCountAsync(ISpecifications<TEntity, TKey> spec)
+            => await ApplaySpecifications(spec).CountAsync();
+        
+
         #endregion
 
 
@@ -47,7 +52,9 @@ namespace Talabat.Infrastructure.Persistence.Repositories.GenericRepository
         private IQueryable<TEntity> ApplaySpecifications(ISpecifications<TEntity, TKey> spec)
         {
             return SpecificationsEvaluator<TEntity, TKey>.GetQuery(_dbContext.Set<TEntity>(), spec);
-        } 
+        }
+
+       
         #endregion
 
     }

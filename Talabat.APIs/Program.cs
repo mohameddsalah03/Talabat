@@ -3,8 +3,11 @@ using Talabat.APIs.Services;
 using Talabat.Core.Application.Abstraction;
 using Talabat.Infrastructure.Persistence;
 using Talabat.Core.Application;
+using Talabat.APIs.Controllers.Errors;
+using Microsoft.AspNetCore.Mvc;
+using Talabat.APIs.Middlewares;
 
- 
+
 namespace Talabat.APIs
 {
     public class Program
@@ -22,7 +25,26 @@ namespace Talabat.APIs
 
             WebApplicationbuilder.Services
                 .AddControllers()
-                .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly); //Register Reqiured Services By ASP.NET Core Web APIs To DI Container 
+                .AddApplicationPart(typeof(Controllers.AssemblyInformation).Assembly) //Register Reqiured Services By ASP.NET Core Web APIs To DI Container 
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    options.SuppressModelStateInvalidFilter = false;
+                    options.InvalidModelStateResponseFactory = (actionContext) =>
+                    {
+
+                        var errors = actionContext.ModelState.Where(P => P.Value!.Errors.Count > 0)
+                                           .Select(P => new ApiValidationErrorResponse.ValidationError()
+                                           {
+                                               Field = P.Key,
+                                               Errors = P.Value!.Errors.Select(E => E.ErrorMessage)
+                                           });
+                        return new BadRequestObjectResult(new ApiValidationErrorResponse()
+                        {
+                            Errors = errors
+                        });
+
+                    };
+                });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
@@ -57,6 +79,8 @@ namespace Talabat.APIs
 
             // Configure the HTTP request pipeline.
 
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -65,6 +89,10 @@ namespace Talabat.APIs
 
             app.UseHttpsRedirection();
 
+            // for EndPoint Not Found
+            app.UseStatusCodePagesWithReExecute("/Errors/{0}");
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             // for wwwroot Path

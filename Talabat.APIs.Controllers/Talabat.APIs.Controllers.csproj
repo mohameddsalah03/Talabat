@@ -14,8 +14,4 @@
     <ProjectReference Include="..\Talabat.Core.Application.Abstraction\Talabat.Core.Application.Abstraction.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\Byggy\" />
-  </ItemGroup>
-
 </Project>

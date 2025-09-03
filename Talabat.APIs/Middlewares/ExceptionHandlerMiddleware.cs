@@ -65,10 +65,25 @@ namespace Talabat.APIs.Middlewares
                     response = new ApiResponse(StatusCodes.Status404NotFound, ex.Message);
                     break;
 
+                    /// 
+                case ValidationException validationException:
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    response = new ApiValidationErrorResponse(ex.Message)
+                    { Errors = (IEnumerable<ApiValidationErrorResponse.ValidationError>)validationException.Errors };
+                    break;
+
                 case BadRequestException:
                     context.Response.StatusCode = StatusCodes.Status400BadRequest;
                     response = new ApiResponse(StatusCodes.Status404NotFound, ex.Message);
                     break;
+
+                case UnauthorizedException:
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    response = new ApiResponse(StatusCodes.Status401Unauthorized, ex.Message);
+                    break;
+
+
+
 
                 default:
                     context.Response.StatusCode = StatusCodes.Status500InternalServerError;

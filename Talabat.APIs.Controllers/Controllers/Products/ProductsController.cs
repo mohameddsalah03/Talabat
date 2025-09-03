@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.Controllers.Controllers.Base;
 using Talabat.Core.Application.Abstraction.Common;
 using Talabat.Core.Application.Abstraction.ModelsDtos.Products;
@@ -9,7 +10,7 @@ namespace Talabat.APIs.Controllers.Controllers.Products
     public class ProductsController(IServiceManager serviceManager) : BaseApiController
     {
 
-        //Get All Produtcs
+ 
         [HttpGet] //Get: /api/Products
         public async Task<ActionResult<Pagination<ProductToReturnDto>>>  GetProducts([FromQuery] ProductSpecParams specParams)
         {

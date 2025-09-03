@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Talabat.Core.Application.Abstraction.ModelsDtos.Basket;
 using Talabat.Core.Application.Abstraction.ModelsDtos.Products;
+using Talabat.Core.Domain.Entites.Basket;
 using Talabat.Core.Domain.Entites.Products;
 
 namespace Talabat.Core.Application.Mapping
@@ -17,6 +19,13 @@ namespace Talabat.Core.Application.Mapping
 
             CreateMap<ProductBrand, BrandDto>();
             CreateMap<ProductCategory, CategoryDto>();
+
+            
+            //for Basket
+            CreateMap<CustomerBasket,CustomerBasketDto>().ReverseMap();
+            CreateMap<BasketItem,BasketItemDto>().ReverseMap();
+
+
 
         }
     }

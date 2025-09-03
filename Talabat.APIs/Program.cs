@@ -6,7 +6,7 @@ using Talabat.Core.Application;
 using Talabat.APIs.Controllers.Errors;
 using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.Middlewares;
-
+using Talabat.Infrastructure;
 
 namespace Talabat.APIs
 {
@@ -52,17 +52,19 @@ namespace Talabat.APIs
             WebApplicationbuilder.Services.AddEndpointsApiExplorer();
             WebApplicationbuilder.Services.AddSwaggerGen();
 
-            // Persistence Services Layer 
+            //Extensions Services Layers 
             WebApplicationbuilder.Services.AddPersistenceServices(WebApplicationbuilder.Configuration);
+            WebApplicationbuilder.Services.AddApplicationServices();
+            WebApplicationbuilder.Services.AddInfrastructureServices(WebApplicationbuilder.Configuration);
 
 
-            //
+            // Interceptors
             WebApplicationbuilder.Services.AddHttpContextAccessor();
             WebApplicationbuilder.Services.AddScoped(typeof(ILoggedInUserService) , typeof(LoggedInUserService));
 
 
-            //
-            WebApplicationbuilder.Services.AddApplicationServices();
+            // register for Identity [user manager]
+            WebApplicationbuilder.Services.AddIdentityServices(WebApplicationbuilder.Configuration);
 
             #endregion
 
@@ -71,7 +73,7 @@ namespace Talabat.APIs
 
             #region Database Initializer 
 
-            await app.InitializeStoreContext();
+            await app.InitializeDbContext();
 
             #endregion
 

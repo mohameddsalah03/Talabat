@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Reflection;
 using Talabat.Core.Domain.Entites.Identity;
-using Talabat.Infrastructure.Persistence.Identity.Config;
+using Talabat.Infrastructure.Persistence.Common;
 
 namespace Talabat.Infrastructure.Persistence.Identity
 {
@@ -18,8 +18,11 @@ namespace Talabat.Infrastructure.Persistence.Identity
         {
             base.OnModelCreating(builder); // Must Keep It
 
-            builder.ApplyConfiguration(new ApplicationUserConfigurations());
-            builder.ApplyConfiguration(new AddressConfigurations());
+            //builder.ApplyConfiguration(new ApplicationUserConfigurations());
+            //builder.ApplyConfiguration(new AddressConfigurations());
+            builder.ApplyConfigurationsFromAssembly(typeof(StoreIdentityDbContext).Assembly,
+                type => type.GetCustomAttribute<DbContextTypeAttribute>()?.DbContextType == typeof(StoreIdentityDbContext));
+
 
         }
 

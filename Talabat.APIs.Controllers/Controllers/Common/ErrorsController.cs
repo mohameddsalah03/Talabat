@@ -14,11 +14,11 @@ namespace Talabat.APIs.Controllers.Controllers.Common
         {
             if (code == StatusCodes.Status404NotFound)
             {
-                var response = new ApiResponse(StatusCodes.Status404NotFound, $"The Request EndPoint:{Request.Path} Is Not Found");
+                var response = new ApiResponse(StatusCodes.Status404NotFound, $"The Request EndPoint Is Not Found");
                 return NotFound(response);
             }
 
-            return StatusCode(code);
+            return StatusCode(code,new ApiResponse(code));
         }
     }
 }

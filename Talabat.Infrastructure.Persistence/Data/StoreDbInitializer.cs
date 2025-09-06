@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using Talabat.Core.Domain.Contracts.Persistence.DbInitializers;
+using Talabat.Core.Domain.Entites.Orders;
 using Talabat.Core.Domain.Entites.Products;
 using Talabat.Infrastructure.Persistence.Common;
 
@@ -56,6 +57,24 @@ namespace Talabat.Infrastructure.Persistence.Data
                 if (Products?.Count > 0)
                 {
                     await dbContext.Set<Product>().AddRangeAsync(Products);
+                    await dbContext.SaveChangesAsync();
+                }
+
+            }
+
+
+            if (!dbContext.DeliveryMethods.Any())
+            {
+                var deliveriesData = await File.ReadAllTextAsync(@"../Talabat.Infrastructure.Persistence/Data/Seeds/delivery.json");
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var deliveries = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveriesData, options);
+
+                if (deliveries?.Count > 0)
+                {
+                    await dbContext.Set<DeliveryMethod>().AddRangeAsync(deliveries);
                     await dbContext.SaveChangesAsync();
                 }
 

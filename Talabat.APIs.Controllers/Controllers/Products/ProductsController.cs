@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.Controllers.Controllers.Base;
 using Talabat.Core.Application.Abstraction.Common;
@@ -10,7 +11,7 @@ namespace Talabat.APIs.Controllers.Controllers.Products
     public class ProductsController(IServiceManager serviceManager) : BaseApiController
     {
 
- 
+        [Authorize]
         [HttpGet] //Get: /api/Products
         public async Task<ActionResult<Pagination<ProductToReturnDto>>>  GetProducts([FromQuery] ProductSpecParams specParams)
         {

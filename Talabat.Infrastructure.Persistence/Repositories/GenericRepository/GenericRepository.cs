@@ -6,7 +6,7 @@ using Talabat.Infrastructure.Persistence.Data;
 namespace Talabat.Infrastructure.Persistence.Repositories.GenericRepository
 {
     internal class GenericRepository<TEntity, TKey>(StoreContext _dbContext) : IGenericRepository<TEntity, TKey>
-        where TEntity : BaseAuditableEntity<TKey>
+        where TEntity : BaseEntity<TKey>
         where TKey : IEquatable<TKey>
     {
 

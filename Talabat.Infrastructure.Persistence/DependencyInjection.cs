@@ -1,10 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Talabat.Core.Domain.Contracts;
 using Talabat.Core.Domain.Contracts.Persistence.DbInitializers;
 using Talabat.Infrastructure.Persistence.Data;
-using Talabat.Infrastructure.Persistence.Data.Interceptors;
 using Talabat.Infrastructure.Persistence.Identity;
 
 namespace Talabat.Infrastructure.Persistence
@@ -26,7 +24,7 @@ namespace Talabat.Infrastructure.Persistence
             #endregion
 
             //
-            services.AddScoped(typeof(ISaveChangesInterceptor), typeof(CustomSaveChangesInterceptors));
+            //services.AddScoped(typeof(ISaveChangesInterceptor), typeof(CustomSaveChangesInterceptors));
 
             //
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork.UnitOfWork));

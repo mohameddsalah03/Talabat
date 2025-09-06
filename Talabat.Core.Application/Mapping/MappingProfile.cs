@@ -4,6 +4,7 @@ using Talabat.Core.Application.Abstraction.ModelsDtos.Basket;
 using Talabat.Core.Application.Abstraction.ModelsDtos.Orders;
 using Talabat.Core.Application.Abstraction.ModelsDtos.Products;
 using Talabat.Core.Domain.Entites.Basket;
+using Talabat.Core.Domain.Entites.Identity;
 using Talabat.Core.Domain.Entites.Orders;
 using Talabat.Core.Domain.Entites.Products;
 
@@ -40,8 +41,12 @@ namespace Talabat.Core.Application.Mapping
             //
             CreateMap<DeliveryMethod, DeliveryMethodDto>();
 
-            //
+            // mapping address for order
             CreateMap<OrderAddress, AddressDto>().ReverseMap();
+            
+            
+            // mapping address for user
+            CreateMap<Address, AddressDto>().ReverseMap();
 
             
 

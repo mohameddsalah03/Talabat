@@ -1,14 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore.Diagnostics;
 using Talabat.Core.Application.Abstraction;
 using Talabat.Core.Domain.Common;
+using Talabat.Core.Domain.Entites.Orders;
 
 namespace Talabat.Infrastructure.Persistence.Data.Interceptors
 {
-    internal class CustomSaveChangesInterceptors : SaveChangesInterceptor
+    internal class AuditInterceptors : SaveChangesInterceptor
     {
         private readonly ILoggedInUserService _loggedInUserService;
 
-        public CustomSaveChangesInterceptors(ILoggedInUserService loggedInUserService)
+        public AuditInterceptors(ILoggedInUserService loggedInUserService)
         {
             _loggedInUserService = loggedInUserService;
         }
@@ -30,10 +31,18 @@ namespace Talabat.Infrastructure.Persistence.Data.Interceptors
         private void UpdateEntites(DbContext? dbContext)
         {
             if (dbContext == null) return;
-            
-            foreach (var entry in dbContext.ChangeTracker.Entries<BaseAuditableEntity<int>>()
-                .Where(entity=>entity.State is EntityState.Added or EntityState.Modified))
+
+            var entris = dbContext.ChangeTracker.Entries<IBaseAuditableEntity>()
+                .Where(entity => entity.State is EntityState.Added or EntityState.Modified);
+
+            foreach (var entry in entris)
             {
+                /// by system user 
+                /// if(entry.Entity is Order or OrderItem)
+                /// {
+                ///     _loggedInUserService.UserId = "from app settings";
+                /// }
+                
                 if (entry.State is EntityState.Added)
                 {
                     entry.Entity.CreatedBy = _loggedInUserService.UserId!;

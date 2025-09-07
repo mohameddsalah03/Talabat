@@ -10,26 +10,43 @@ namespace Talabat.Infrastructure.Persistence.Repositories.GenericRepository
       
         public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> dbset , ISpecifications<TEntity,TKey> spec)
         {
-            var query = dbset; // _dbContext.Set<Product>();
 
-            if(spec.Criteria is not null) // P => P.Id.Equals(1)
+            var query = dbset; // _dbContext.Set<Product>();
+            
+            #region Criteria [Filtration] [Where()]
+
+            if (spec.Criteria is not null) // P => P.Id.Equals(1)
             {
                 query = query.Where(spec.Criteria); // _dbContext.Set<Product>().Where(P => P.Id.Equals(1))
+
             }
 
-            ///
-            //Include Expressions
-            // 1. P => P.Brand
-            // 2. P => P.Category
-            // ...
+
+            #endregion
+           
+            #region Order By
+
+            if(spec.OrderByDesc is not null)
+                query = query.OrderByDescending(spec.OrderByDesc);
+            else if(spec.OrderBy is not null)
+                query = query.OrderBy(spec.OrderBy);
+
+
+            #endregion
+
+            #region  Pagination
+
+            if (spec.IsPaginationEnabled)
+                query = query.Skip(spec.Skip).Take(spec.Take);
+            #endregion
+            
+            #region Includes [Loading Navigational Property]
 
             query = spec.Includes.Aggregate(query, (CurrentQuery, IncludeExpression) =>
                 CurrentQuery.Include(IncludeExpression)
-            );
-
-            //Final Result 
-            // _dbContext.Set<Product>().Where(P => P.Id.Equals(1)).Include(P => P.Brand).Include(P => P.Category)
-
+            ); 
+            #endregion
+            
             return query;
         }
     }

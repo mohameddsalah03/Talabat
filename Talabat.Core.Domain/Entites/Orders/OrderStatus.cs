@@ -1,9 +1,16 @@
-﻿namespace Talabat.Core.Domain.Entites.Orders
+﻿using System.Runtime.Serialization;
+
+namespace Talabat.Core.Domain.Entites.Orders
 {
     public enum OrderStatus
     {
-        Pending =1,
-        PaymentReceived =2,
-        PaymentFailed =3,
+        [EnumMember(Value = "Pending ")]
+        Pending ,
+        
+        [EnumMember(Value = "Payment Received ")]
+        PaymentReceived ,
+        
+        [EnumMember(Value = "Payment Failed ")]
+        PaymentFailed ,
     }
 }

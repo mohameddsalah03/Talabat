@@ -1,5 +1,5 @@
-﻿using Talabat.Core.Application.Abstraction.Common;
-using Talabat.Core.Application.Abstraction.ModelsDtos.Products;
+﻿using Talabat.Shared.DTOs.Common;
+using Talabat.Shared.DTOs.Products;
 
 namespace Talabat.Core.Application.Abstraction.Services.Products
 {

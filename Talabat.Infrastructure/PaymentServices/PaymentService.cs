@@ -1,17 +1,16 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Stripe;
-using Stripe.Forwarding;
-using Talabat.Core.Application.Abstraction.ModelsDtos.Basket;
-using Talabat.Core.Application.Exceptions;
+using Talabat.Core.Application.Abstraction.Common.Contracts.Infrastructure;
 using Talabat.Core.Domain.Contracts;
 using Talabat.Core.Domain.Contracts.Infrastructure;
 using Talabat.Core.Domain.Entites.Basket;
 using Talabat.Core.Domain.Entites.Orders;
 using Talabat.Core.Domain.Specifications.Orders;
-using Talabat.Shared.Models;
+using Talabat.Shared.DTOs.Basket;
+using Talabat.Shared.Exceptions;
+using Talabat.Shared.Models.Settings;
 using Product = Talabat.Core.Domain.Entites.Products.Product;
 
 namespace Talabat.Infrastructure.PaymentServices

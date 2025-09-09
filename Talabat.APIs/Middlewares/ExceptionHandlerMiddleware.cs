@@ -1,5 +1,6 @@
 ﻿using Talabat.APIs.Controllers.Errors;
 using Talabat.Core.Application.Exceptions;
+using Talabat.Shared.Exceptions;
 
 namespace Talabat.APIs.Middlewares
 {

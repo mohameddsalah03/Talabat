@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.Controllers.Controllers.Base;
-using Talabat.Core.Application.Abstraction.Common;
-using Talabat.Core.Application.Abstraction.ModelsDtos.Products;
 using Talabat.Core.Application.Abstraction.Services;
+using Talabat.Shared.DTOs.Common;
+using Talabat.Shared.DTOs.Products;
 
 namespace Talabat.APIs.Controllers.Controllers.Products
 {

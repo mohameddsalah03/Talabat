@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Talabat.Core.Application.Abstraction.Common;
-using Talabat.Core.Application.Abstraction.ModelsDtos.Products;
 using Talabat.Core.Application.Abstraction.Services.Products;
-using Talabat.Core.Application.Exceptions;
 using Talabat.Core.Domain.Contracts;
 using Talabat.Core.Domain.Entites.Products;
 using Talabat.Core.Domain.Specifications.Products;
+using Talabat.Shared.DTOs.Common;
+using Talabat.Shared.DTOs.Products;
+using Talabat.Shared.Exceptions;
 
 namespace Talabat.Core.Application.Services.Products
 {

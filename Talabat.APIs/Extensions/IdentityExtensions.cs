@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Talabat.Core.Application.Abstraction.ModelsDtos.Auth;
 using Talabat.Core.Domain.Entites.Identity;
 using Talabat.Infrastructure.Persistence.Identity;
+using Talabat.Shared.Models.Settings;
 
 namespace Talabat.APIs.Extensions
 {

@@ -5,12 +5,14 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Talabat.Core.Application.Abstraction.Common;
-using Talabat.Core.Application.Abstraction.ModelsDtos.Auth;
 using Talabat.Core.Application.Abstraction.Services.Auth;
 using Talabat.Core.Application.Exceptions;
 using Talabat.Core.Application.Extensions;
 using Talabat.Core.Domain.Entites.Identity;
+using Talabat.Shared.DTOs.Auth;
+using Talabat.Shared.DTOs.Common;
+using Talabat.Shared.Exceptions;
+using Talabat.Shared.Models.Settings;
 
 namespace Talabat.Core.Application.Services.Auth
 {

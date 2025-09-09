@@ -52,6 +52,15 @@ namespace Talabat.APIs
             WebApplicationbuilder.Services.AddEndpointsApiExplorer();
             WebApplicationbuilder.Services.AddSwaggerGen();
 
+            // For Angular Project Cors Policy
+            WebApplicationbuilder.Services.AddCors(corsOptions=>
+            {
+                corsOptions.AddPolicy("TalabatPolicy", policyBuilder =>
+                {
+                    policyBuilder.AllowAnyHeader().AllowAnyMethod().WithOrigins(WebApplicationbuilder.Configuration["Urls:FrontBaseUrl"]!);
+                });
+            });
+
             //Extensions Services Layers 
             WebApplicationbuilder.Services.AddPersistenceServices(WebApplicationbuilder.Configuration);
             WebApplicationbuilder.Services.AddApplicationServices();
@@ -94,11 +103,14 @@ namespace Talabat.APIs
             // for EndPoint Not Found
             app.UseStatusCodePagesWithReExecute("/Errors/{0}");
 
+            // for wwwroot Path
+            app.UseStaticFiles();
+
+            app.UseCors("TalabatPolicy");
+
             app.UseAuthentication();
             app.UseAuthorization();
 
-            // for wwwroot Path
-            app.UseStaticFiles();
 
             app.MapControllers();
 

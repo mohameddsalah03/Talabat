@@ -4,13 +4,19 @@ using Talabat.Core.Application.Abstraction.Services.Basket;
 using Talabat.Core.Application.Abstraction.Services.Orders;
 using Talabat.Core.Application.Exceptions;
 using Talabat.Core.Domain.Contracts;
+using Talabat.Core.Domain.Contracts.Infrastructure;
 using Talabat.Core.Domain.Entites.Orders;
 using Talabat.Core.Domain.Entites.Products;
 using Talabat.Core.Domain.Specifications.Orders;
 
 namespace Talabat.Core.Application.Services.Orders
 {
-    public class OrderService(IUnitOfWork _unitOfWork, IMapper _mapper, IBasketService _basketService) : IOrderService
+    public class OrderService(
+        IUnitOfWork _unitOfWork,
+        IMapper _mapper,
+        IBasketService _basketService,
+        IPaymentService paymentService
+        ) : IOrderService
     {
         public async Task<OrderToReturnDto> CreateOrderAsync(string byuerEmail, OrderToCreateDto orderDto)
         {
@@ -58,6 +64,16 @@ namespace Talabat.Core.Application.Services.Orders
             // 5.Get DeliveryMethod
             var deliveryMethod = await _unitOfWork.GetRepository<DeliveryMethod,int>().GetAsync(orderDto.DeliveryMethodId);
 
+
+            var orderRepo = _unitOfWork.GetRepository<Order, int>();
+            var orderSpec = new OrderWithPaymentIntentSoecifications(basket.PaymentIntentId!);
+            var exsitingOrder = await orderRepo.GetWithSpecAsync(orderSpec);
+            if(exsitingOrder is not null)
+            {
+                orderRepo.Delete(exsitingOrder);
+                await paymentService.CreateOrUpdatePaymentIntent(basket.Id);
+            }
+
             // 6.create Order
             var OrderToCreate = new Order()
             {
@@ -66,9 +82,10 @@ namespace Talabat.Core.Application.Services.Orders
                 Items = orderItems,
                 DeliveryMethod = deliveryMethod,
                 SubTotal = subTotal,
+                PaymentIntentId = basket.PaymentIntentId!
             };
             
-            await _unitOfWork.GetRepository<Order,int>().AddAsync(OrderToCreate);
+            await orderRepo.AddAsync(OrderToCreate);
 
             // 7. save to database
             var created = await _unitOfWork.CompleteAsync() > 0;

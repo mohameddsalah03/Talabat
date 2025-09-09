@@ -11,7 +11,7 @@ namespace Talabat.APIs.Controllers.Controllers.Products
     public class ProductsController(IServiceManager serviceManager) : BaseApiController
     {
 
-        [Authorize]
+        //[Authorize]
         [HttpGet] //Get: /api/Products
         public async Task<ActionResult<Pagination<ProductToReturnDto>>>  GetProducts([FromQuery] ProductSpecParams specParams)
         {

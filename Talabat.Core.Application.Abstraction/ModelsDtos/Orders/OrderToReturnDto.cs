@@ -23,6 +23,6 @@ namespace Talabat.Core.Application.Abstraction.ModelsDtos.Orders
         public decimal SubTotal { get; set; }
         public decimal Total { get; set; }
 
-
+        public string PaymentIntentId { get; set; }
     }
 }

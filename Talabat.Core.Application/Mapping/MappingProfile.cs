@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Talabat.Core.Application.Abstraction.Common;
-using Talabat.Core.Application.Abstraction.ModelsDtos.Basket;
-using Talabat.Core.Application.Abstraction.ModelsDtos.Orders;
-using Talabat.Core.Application.Abstraction.ModelsDtos.Products;
 using Talabat.Core.Domain.Entites.Basket;
 using Talabat.Core.Domain.Entites.Identity;
 using Talabat.Core.Domain.Entites.Orders;
 using Talabat.Core.Domain.Entites.Products;
+using Talabat.Shared.DTOs.Basket;
+using Talabat.Shared.DTOs.Common;
+using Talabat.Shared.DTOs.Orders;
+using Talabat.Shared.DTOs.Products;
 
 namespace Talabat.Core.Application.Mapping
 {

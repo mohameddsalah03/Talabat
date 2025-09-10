@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Talabat.APIs.Controllers.Controllers.Base;
-using Talabat.Core.Application.Abstraction.ModelsDtos.Orders;
 using Talabat.Core.Application.Abstraction.Services;
+using Talabat.Shared.DTOs.Orders;
 
 namespace Talabat.APIs.Controllers.Controllers.Orders
 {

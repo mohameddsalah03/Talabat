@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.Controllers.Controllers.Base;
-using Talabat.Core.Application.Abstraction.ModelsDtos.Basket;
-using Talabat.Core.Domain.Contracts.Infrastructure;
+using Talabat.Core.Application.Abstraction.Common.Contracts.Infrastructure;
+using Talabat.Shared.DTOs.Basket;
 
 namespace Talabat.APIs.Controllers.Controllers.Payment
 {

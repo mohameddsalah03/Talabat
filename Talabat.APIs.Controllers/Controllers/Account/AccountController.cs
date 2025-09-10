@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using Talabat.APIs.Controllers.Controllers.Base;
-using Talabat.Core.Application.Abstraction.Common;
-using Talabat.Core.Application.Abstraction.ModelsDtos.Auth;
 using Talabat.Core.Application.Abstraction.Services;
+using Talabat.Shared.DTOs.Auth;
+using Talabat.Shared.DTOs.Common;
 
 namespace Talabat.APIs.Controllers.Controllers.Account
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Talabat.Core.Application.Abstraction.Common.Contracts.Infrastructure;
 using Talabat.Core.Application.Abstraction.Services;
 using Talabat.Core.Application.Abstraction.Services.Auth;
-using Talabat.Core.Application.Abstraction.Services.Basket;
 using Talabat.Core.Application.Abstraction.Services.Orders;
 using Talabat.Core.Application.Mapping;
 using Talabat.Core.Application.Services;
@@ -20,7 +20,7 @@ namespace Talabat.Core.Application
 
             // Service Manager
             services.AddScoped(typeof(IServiceManager), typeof(ServiceManager));
-
+              
             // BasketService
             services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<IAuthService, AuthService>();

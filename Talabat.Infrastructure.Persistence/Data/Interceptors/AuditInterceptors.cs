@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Diagnostics;
 using Talabat.Core.Application.Abstraction;
 using Talabat.Core.Domain.Common;
-using Talabat.Core.Domain.Entites.Orders;
+
 
 namespace Talabat.Infrastructure.Persistence.Data.Interceptors
 {
@@ -42,6 +42,10 @@ namespace Talabat.Infrastructure.Persistence.Data.Interceptors
                 /// {
                 ///     _loggedInUserService.UserId = "from app settings";
                 /// }
+                /// 
+                
+                if (string.IsNullOrEmpty(_loggedInUserService.UserId))
+                    _loggedInUserService.UserId = "";
                 
                 if (entry.State is EntityState.Added)
                 {

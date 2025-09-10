@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
+using Talabat.Core.Application.Abstraction.Common.Contracts.Infrastructure;
 using Talabat.Core.Domain.Contracts.Infrastructure;
 using Talabat.Infrastructure.BasketRepositores;
 using Talabat.Infrastructure.PaymentServices;
-using Talabat.Shared.Models;
+using Talabat.Shared.Models.Settings;
 
 namespace Talabat.Infrastructure
 {

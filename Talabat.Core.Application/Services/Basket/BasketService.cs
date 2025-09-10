@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Configuration;
-using Talabat.Core.Application.Abstraction.ModelsDtos.Basket;
-using Talabat.Core.Application.Abstraction.Services.Basket;
-using Talabat.Core.Application.Exceptions;
+using Talabat.Core.Application.Abstraction.Common.Contracts.Infrastructure;
 using Talabat.Core.Domain.Contracts.Infrastructure;
 using Talabat.Core.Domain.Entites.Basket;
+using Talabat.Shared.DTOs.Basket;
+using Talabat.Shared.Exceptions;
 
 namespace Talabat.Core.Application.Services.Basket
 {

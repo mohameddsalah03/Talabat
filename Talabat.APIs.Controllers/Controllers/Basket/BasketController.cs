@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Talabat.APIs.Controllers.Controllers.Base;
-using Talabat.Core.Application.Abstraction.ModelsDtos.Basket;
-using Talabat.Core.Application.Abstraction.Services;
+using Talabat.Core.Application.Abstraction.Common.Contracts.Infrastructure;
+using Talabat.Shared.DTOs.Basket;
 
 namespace Talabat.APIs.Controllers.Controllers.Basket
 {
 
-    public class BasketController(IServiceManager serviceManager) : BaseApiController
+    public class BasketController(IBasketService basketService) : BaseApiController
     {
 
         [HttpGet] // Get: /api/Basket?id=
         public async Task<ActionResult<CustomerBasketDto>> GetBasket(string basketId)
         {
-            var basket = await serviceManager.BasketService.GetCustomerBasketAsync(basketId);
+            var basket = await basketService.GetCustomerBasketAsync(basketId);
             return Ok(basket);
         }
 
@@ -20,7 +20,7 @@ namespace Talabat.APIs.Controllers.Controllers.Basket
         [HttpPost] // Post: /api/Basket
         public async Task<ActionResult<CustomerBasketDto>> UpdateBasket(CustomerBasketDto basketDto)
         {
-            var basket = await serviceManager.BasketService.UpdateCustomerBasketAsync(basketDto);
+            var basket = await basketService.UpdateCustomerBasketAsync(basketDto);
             return Ok(basket);
         }
 
@@ -28,7 +28,7 @@ namespace Talabat.APIs.Controllers.Controllers.Basket
         [HttpDelete] // Delete: /api/Basket
         public async Task DeleteBasket(string basketId)
         {
-            await serviceManager.BasketService.DeleteCustomerBasketAsync(basketId);
+            await basketService.DeleteCustomerBasketAsync(basketId);
         }
 
     }
